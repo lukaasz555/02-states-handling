@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { IProduct } from '../../interfaces/IProduct';
 import './ProductItem.css';
 
@@ -6,8 +7,18 @@ interface ProductItemProps {
 }
 
 export const ProductItem = ({ product }: ProductItemProps) => {
+	const [error, setError] = useState('');
 	const { price, name, id, quantity } = product;
-	console.log(price, name, id, quantity);
+
+	console.log(price, name, id, quantity, setError);
+
+	const onAddClick = () => {
+		// console.log('should add to cart item with id ', id);
+	};
+
+	const onRemoveItemClick = () => {
+		// console.log('should remove one item of product with id ', id);
+	};
 
 	return (
 		<div className='product__wrapper'>
@@ -15,11 +26,19 @@ export const ProductItem = ({ product }: ProductItemProps) => {
 				<h3>
 					{name} - {price} zł
 				</h3>
+				<p>{id}</p>
 			</div>
 			<div className='product__actions'>
-				<button className='product__actions--btn'>-</button>
-				<p className='product__actions--qty'>124</p>
-				<button className='product__actions--btn'>+</button>
+				<div>
+					<button className='product__actions--btn' onClick={onRemoveItemClick}>
+						-
+					</button>
+					<p className='product__actions--qty'>{quantity}</p>
+					<button className='product__actions--btn' onClick={onAddClick}>
+						+
+					</button>
+				</div>
+				<p className='product__actions--error'>{error}</p>
 			</div>
 		</div>
 	);

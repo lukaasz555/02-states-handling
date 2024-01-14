@@ -1,0 +1,29 @@
+.summary__wrapper {
+	display: flex;
+	flex-direction: column;
+	width: 50%;
+	min-width: 250px;
+	max-width: 460px;
+	height: 100%;
+	padding: 0.5em 0.75em;
+	border-radius: 8px;
+	background: rgba(255, 255, 255, 0.05);
+	margin-left: 2em;
+}
+
+.summery__tools {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.summary__content {
+	height: 100px;
+}
+
+.summary__content--empty {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+	width: 100%;
+}
