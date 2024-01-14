@@ -1,17 +1,23 @@
-import { useState } from 'react';
+import { useReducer } from 'react';
 import { ProductsList } from '../../components/ProductsList/ProductsList';
 import { Summary } from '../../components/Summary/Summary';
+import { CartContext } from '../../context/CartContext';
+import { cartReducer, initCartState } from '../../reducers/cartReducer';
 import data from '../../data/data.json';
-import { IProduct } from '../../interfaces/IProduct';
 import './Checkout.css';
 
 export const Checkout = () => {
-	const [productsInCart, setProductsInCart] = useState<IProduct[]>([]);
+	const [state, dispatch] = useReducer(cartReducer, initCartState);
 
 	return (
 		<main className='checkout__wrapper'>
-			<ProductsList products={data.items} />
-			<Summary productsInCart={productsInCart} />
+			<CartContext.Provider value={{ state, dispatch }}>
+				<ProductsList
+					allProducts={data.items}
+					productsInCart={state.products}
+				/>
+				<Summary productsInCart={state.products} />
+			</CartContext.Provider>
 		</main>
 	);
 };

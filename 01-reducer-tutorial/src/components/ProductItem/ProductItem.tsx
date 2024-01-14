@@ -1,23 +1,40 @@
 import { useState } from 'react';
 import { IProduct } from '../../interfaces/IProduct';
+import { CartActionTypeEnum } from '../../reducers/cartReducer';
 import './ProductItem.css';
+import { useCartContext } from '../../context/CartContext';
 
 interface ProductItemProps {
 	product: IProduct;
+	isAvailable: boolean;
 }
 
-export const ProductItem = ({ product }: ProductItemProps) => {
+export const ProductItem = ({ product, isAvailable }: ProductItemProps) => {
 	const [error, setError] = useState('');
+	const { dispatch } = useCartContext();
 	const { price, name, id, quantity } = product;
 
-	console.log(price, name, id, quantity, setError);
+	// console.log(price, name, id, quantity, setError);
 
 	const onAddClick = () => {
-		// console.log('should add to cart item with id ', id);
+		dispatch({
+			type: CartActionTypeEnum.ADD,
+			payload: {
+				...product,
+				quantity: 1,
+			},
+		});
 	};
 
 	const onRemoveItemClick = () => {
 		// console.log('should remove one item of product with id ', id);
+		dispatch({
+			type: CartActionTypeEnum.REMOVE_ITEM,
+			payload: {
+				...product,
+				quantity: 1,
+			},
+		});
 	};
 
 	return (
@@ -34,7 +51,10 @@ export const ProductItem = ({ product }: ProductItemProps) => {
 						-
 					</button>
 					<p className='product__actions--qty'>{quantity}</p>
-					<button className='product__actions--btn' onClick={onAddClick}>
+					<button
+						className='product__actions--btn'
+						disabled={!isAvailable}
+						onClick={onAddClick}>
 						+
 					</button>
 				</div>
