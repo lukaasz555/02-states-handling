@@ -1,17 +1,28 @@
-import { useEffect, useState } from 'react';
-import { useCartReducer } from '../../hooks/useCartReducer';
-import { IProduct } from '../../interfaces/IProduct';
+// import { useEffect, useState } from 'react';
+// import { useCartReducer } from '../../hooks/useCartReducer';
+// import { IProduct } from '../../interfaces/IProduct';
 import './Summary.css';
+import { CartState } from '../../reducers/cartReducer';
 
-export const Summary = () => {
-	const [prods, setProds] = useState<IProduct[]>([]);
+interface SummaryProps {
+	state: CartState;
+	submitCart: () => void;
+	removeAllProducts: () => void;
+}
 
-	const { state, removeAllProducts, submitCart } = useCartReducer();
+export const Summary = ({
+	state,
+	removeAllProducts,
+	submitCart,
+}: SummaryProps) => {
+	// const [prods, setProds] = useState<IProduct[]>([]);
 
-	useEffect(() => {
-		// console.log('prods state changed -> ', state.products);
-		setProds(state.products);
-	}, [state.products]);
+	// const { state, removeAllProducts, submitCart } = useCartReducer();
+
+	// useEffect(() => {
+	// 	console.log('prods state changed -> ', state.products);
+	// 	setProds(state.products);
+	// }, [state.products]);
 
 	const onClearCart = () => {
 		removeAllProducts();
@@ -23,13 +34,13 @@ export const Summary = () => {
 				<button onClick={onClearCart}>Clear cart</button>
 			</div>
 			<div className='summary__content'>
-				{!prods.length ? (
+				{!state.products.length ? (
 					<div className='summary__content--empty'>
 						<p>You have no items in your cart</p>
 					</div>
 				) : (
 					<div className='summary__content--items'>
-						{prods.map((p) => (
+						{state.products.map((p) => (
 							<p key={p.id}>{p.name}</p>
 						))}
 						<div>

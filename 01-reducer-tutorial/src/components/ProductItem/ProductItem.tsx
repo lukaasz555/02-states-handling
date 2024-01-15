@@ -1,15 +1,20 @@
 import { useState } from 'react';
 import { IProduct } from '../../interfaces/IProduct';
-import { useCartReducer } from '../../hooks/useCartReducer';
+// import { useCartReducer } from '../../hooks/useCartReducer';
 import './ProductItem.css';
 
 interface ProductItemProps {
 	product: IProduct;
+	actions: {
+		addProduct: (arg: IProduct) => void;
+		removeProduct: (arg: IProduct) => void;
+		removeItem: (arg: IProduct) => void;
+	};
 }
 
-export const ProductItem = ({ product }: ProductItemProps) => {
+export const ProductItem = ({ product, actions }: ProductItemProps) => {
 	const [error, setError] = useState('');
-	const { addProduct, removeItem } = useCartReducer();
+	const { addProduct, removeItem } = { ...actions };
 	const { price, name, id, quantity } = product;
 
 	console.log('st', setError.toString());
