@@ -7,6 +7,7 @@
 	border-radius: 8px;
 	width: 100%;
 	min-width: 250px;
+	box-sizing: inherit;
 }
 
 .product__details h3 {

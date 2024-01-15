@@ -1,8 +1,5 @@
-// import { useEffect, useState } from 'react';
-// import { useCartReducer } from '../../hooks/useCartReducer';
-// import { IProduct } from '../../interfaces/IProduct';
-import './Summary.css';
 import { CartState } from '../../reducers/cartReducer';
+import './Summary.css';
 
 interface SummaryProps {
 	state: CartState;
@@ -15,15 +12,6 @@ export const Summary = ({
 	removeAllProducts,
 	submitCart,
 }: SummaryProps) => {
-	// const [prods, setProds] = useState<IProduct[]>([]);
-
-	// const { state, removeAllProducts, submitCart } = useCartReducer();
-
-	// useEffect(() => {
-	// 	console.log('prods state changed -> ', state.products);
-	// 	setProds(state.products);
-	// }, [state.products]);
-
 	const onClearCart = () => {
 		removeAllProducts();
 	};
