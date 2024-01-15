@@ -1,14 +1,21 @@
+import { useEffect, useState } from 'react';
+import { useCartReducer } from '../../hooks/useCartReducer';
 import { IProduct } from '../../interfaces/IProduct';
 import './Summary.css';
 
-interface SummaryProps {
-	productsInCart: IProduct[];
-}
+export const Summary = () => {
+	const [prods, setProds] = useState<IProduct[]>([]);
 
-export const Summary = ({ productsInCart }: SummaryProps) => {
-	console.log(productsInCart);
+	const { state, removeAllProducts, submitCart } = useCartReducer();
 
-	const onClearCart = () => console.log('clear cart');
+	useEffect(() => {
+		// console.log('prods state changed -> ', state.products);
+		setProds(state.products);
+	}, [state.products]);
+
+	const onClearCart = () => {
+		removeAllProducts();
+	};
 
 	return (
 		<section className='summary__wrapper'>
@@ -16,13 +23,19 @@ export const Summary = ({ productsInCart }: SummaryProps) => {
 				<button onClick={onClearCart}>Clear cart</button>
 			</div>
 			<div className='summary__content'>
-				{!productsInCart.length ? (
+				{!prods.length ? (
 					<div className='summary__content--empty'>
 						<p>You have no items in your cart</p>
 					</div>
 				) : (
 					<div className='summary__content--items'>
-						<p>Some items should be shown here</p>
+						{prods.map((p) => (
+							<p key={p.id}>{p.name}</p>
+						))}
+						<div>
+							<p>TOTAL: {state.totalValue} zł</p>
+							<button onClick={submitCart}>SUBMIT</button>
+						</div>
 					</div>
 				)}
 			</div>
