@@ -13,7 +13,7 @@ export interface CartState {
 	totalValue: number;
 }
 
-export interface CartPayload {
+export interface CartAction {
 	type: CartActionTypeEnum;
 	payload: IProduct;
 }
@@ -23,14 +23,14 @@ export const initCartState: CartState = {
 	totalValue: 0,
 };
 
-export function cartReducer(state: CartState, action: CartPayload): CartState {
+export function cartReducer(state: CartState, action: CartAction): CartState {
 	switch (action.type) {
 		case CartActionTypeEnum.ADD:
-			if (state.products.find((p) => p.id == action.payload.id)) {
+			if (state.products.find((p) => p.id === action.payload.id)) {
 				return {
 					...state,
 					products: state.products.map((p) =>
-						p.id == action.payload.id ? { ...p, quantity: p.quantity + 1 } : p
+						p.id === action.payload.id ? { ...p, quantity: p.quantity + 1 } : p
 					),
 				};
 			}
@@ -39,32 +39,41 @@ export function cartReducer(state: CartState, action: CartPayload): CartState {
 				products: [...state.products, { ...action.payload, quantity: 1 }],
 			};
 		case CartActionTypeEnum.DELETE:
-			state.products = state.products.filter((p) => p.id !== action.payload.id);
-			return state;
-		case CartActionTypeEnum.REMOVE_ITEM:
 			return {
 				...state,
-				products: state.products
-					.map((p) =>
-						p.id == action.payload.id
-							? {
-									...p,
-									quantity: p.quantity - 1,
-									// eslint-disable-next-line no-mixed-spaces-and-tabs
-							  }
-							: p
-					)
-					.filter((p) => p.quantity > 0),
+				products: state.products.filter((p) => p.id !== action.payload.id),
 			};
+		case CartActionTypeEnum.REMOVE_ITEM: {
+			const updatedProds = state.products
+				.map((p) =>
+					p.id === action.payload.id
+						? {
+								...p,
+								quantity: p.quantity - 1,
+								// eslint-disable-next-line no-mixed-spaces-and-tabs
+						  }
+						: p
+				)
+				.filter((p) => p.quantity > 0);
+			return {
+				...state,
+				products: updatedProds,
+			};
+		}
 		case CartActionTypeEnum.CLEAR_CART:
-			state.products = [];
-			return state;
+			return {
+				...state,
+				products: [],
+				totalValue: 0,
+			};
 		case CartActionTypeEnum.CALC:
-			state.totalValue = state.products.reduce(
-				(acc, curr) => acc + curr.price,
-				0
-			);
-			return state;
+			return {
+				...state,
+				totalValue: (state.totalValue = state.products.reduce(
+					(acc, curr) => acc + curr.price,
+					0
+				)),
+			};
 		default:
 			return state;
 	}
