@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { IProduct } from '../../interfaces/IProduct';
-// import { useCartReducer } from '../../hooks/useCartReducer';
+import { CartState } from '../../reducers/cartReducer';
 import './ProductItem.css';
 
 interface ProductItemProps {
 	product: IProduct;
+	state: CartState;
 	actions: {
 		addProduct: (arg: IProduct) => void;
 		removeProduct: (arg: IProduct) => void;
@@ -12,12 +13,12 @@ interface ProductItemProps {
 	};
 }
 
-export const ProductItem = ({ product, actions }: ProductItemProps) => {
+export const ProductItem = ({ product, actions, state }: ProductItemProps) => {
 	const [error, setError] = useState('');
+	const [isAddAvailable, setAddAvailable] = useState(true);
+	const [isRemoveAvailable, setRemoveAvailable] = useState(false);
 	const { addProduct, removeItem } = { ...actions };
 	const { price, name, id, quantity } = product;
-
-	console.log('st', setError.toString());
 
 	const onAddClick = () => {
 		addProduct(product);
@@ -26,6 +27,22 @@ export const ProductItem = ({ product, actions }: ProductItemProps) => {
 	const onRemoveItemClick = () => {
 		removeItem(product);
 	};
+
+	const getItemQuantityInCart = () => {
+		const product = state.products.find((p) => p.id === id);
+		return product?.quantity || 0;
+	};
+
+	const handleButtonsDisabled = () => {
+		const itemsInCart = getItemQuantityInCart();
+		setError(itemsInCart < quantity ? '' : `No more ${name}s available`);
+		setAddAvailable(itemsInCart < quantity ? true : false);
+		setRemoveAvailable(itemsInCart > 0 ? true : false);
+	};
+
+	useEffect(() => {
+		handleButtonsDisabled();
+	}, [state.products]);
 
 	return (
 		<div className='product__wrapper'>
@@ -37,11 +54,17 @@ export const ProductItem = ({ product, actions }: ProductItemProps) => {
 			</div>
 			<div className='product__actions'>
 				<div>
-					<button className='product__actions--btn' onClick={onRemoveItemClick}>
+					<button
+						className='product__actions--btn'
+						disabled={!isRemoveAvailable}
+						onClick={onRemoveItemClick}>
 						-
 					</button>
-					<p className='product__actions--qty'>{quantity}</p>
-					<button className='product__actions--btn' onClick={onAddClick}>
+					<p className='product__actions--qty'>{getItemQuantityInCart()}</p>
+					<button
+						className='product__actions--btn'
+						disabled={!isAddAvailable}
+						onClick={onAddClick}>
 						+
 					</button>
 				</div>

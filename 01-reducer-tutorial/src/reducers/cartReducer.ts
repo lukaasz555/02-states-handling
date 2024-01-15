@@ -33,11 +33,16 @@ export function cartReducer(state: CartState, action: CartAction): CartState {
 						p.id === action.payload.id ? { ...p, quantity: p.quantity + 1 } : p
 					),
 				};
+			} else {
+				const products = [
+					...state.products,
+					{ ...action.payload, quantity: 1 },
+				];
+				return {
+					...state,
+					products,
+				};
 			}
-			return {
-				...state,
-				products: [...state.products, { ...action.payload, quantity: 1 }],
-			};
 		case CartActionTypeEnum.DELETE:
 			return {
 				...state,
@@ -70,7 +75,7 @@ export function cartReducer(state: CartState, action: CartAction): CartState {
 			return {
 				...state,
 				totalValue: (state.totalValue = state.products.reduce(
-					(acc, curr) => acc + curr.price,
+					(acc, curr) => acc + curr.price * curr.quantity,
 					0
 				)),
 			};

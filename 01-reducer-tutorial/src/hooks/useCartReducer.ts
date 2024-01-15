@@ -46,7 +46,6 @@ export const useCartReducer = () => {
 
 	return {
 		state,
-		dispatch,
 		addProduct,
 		removeProduct,
 		removeItem,
