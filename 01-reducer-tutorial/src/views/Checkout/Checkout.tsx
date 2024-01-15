@@ -9,7 +9,7 @@ export const Checkout = () => {
 
 	return (
 		<main className='checkout__wrapper'>
-			<ProductsList allProducts={data.items} actions={actions} />
+			<ProductsList allProducts={data.items} state={state} actions={actions} />
 			<Summary
 				state={state}
 				submitCart={submitCart}

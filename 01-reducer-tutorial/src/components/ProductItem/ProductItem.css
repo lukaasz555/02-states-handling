@@ -27,6 +27,8 @@
 .product__actions {
 	display: flex;
 	flex-direction: column;
+	align-items: flex-end;
+	width: 150px;
 }
 
 .product__actions > div {

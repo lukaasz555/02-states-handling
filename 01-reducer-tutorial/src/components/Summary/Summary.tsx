@@ -28,9 +28,6 @@ export const Summary = ({
 					</div>
 				) : (
 					<div className='summary__content--items'>
-						{state.products.map((p) => (
-							<p key={p.id}>{p.name}</p>
-						))}
 						<div>
 							<p>TOTAL: {state.totalValue} zł</p>
 							<button onClick={submitCart}>SUBMIT</button>
