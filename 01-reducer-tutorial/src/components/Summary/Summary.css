@@ -1,0 +1,40 @@
+.summary__wrapper {
+	display: flex;
+	flex-direction: column;
+	min-width: 250px;
+	height: 100%;
+	padding: 0.5em 0.75em;
+	border-radius: 8px;
+	background: rgba(255, 255, 255, 0.05);
+	width: 100%;
+	margin-top: 1em;
+	box-sizing: inherit;
+}
+
+.summery__tools {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.summary__content {
+}
+
+.summary__content--empty {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+	width: 100%;
+}
+
+.summary__content--items {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+}
+
+.summary__content--items > div {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
