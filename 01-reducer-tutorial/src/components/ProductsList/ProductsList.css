@@ -1,0 +1,7 @@
+.productslist__wrapper {
+	display: flex;
+	box-sizing: inherit;
+	flex-direction: column;
+	row-gap: 0.5em;
+	width: 100%;
+}
