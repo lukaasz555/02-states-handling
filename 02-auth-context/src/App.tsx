@@ -10,7 +10,8 @@ function App() {
 	const [isLoggedIn, setLoggedIn] = useState(true);
 
 	useEffect(() => {
-		setLoggedIn(Cookies.get('email') ? true : false);
+		const email = Cookies.get('email');
+		setLoggedIn(email === 'jankowalski@gmail.com' ? true : false);
 	}, []);
 
 	return (
