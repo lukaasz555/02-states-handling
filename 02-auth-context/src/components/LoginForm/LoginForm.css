@@ -1,0 +1,9 @@
+.form__wrapper {
+	display: flex;
+	flex-direction: column;
+	row-gap: 1em;
+
+	/**/
+	/* border: 1px solid red; */
+	min-width: 250px;
+}
