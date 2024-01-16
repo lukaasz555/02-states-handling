@@ -1,10 +1,12 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { Input } from '../Input/Input';
 import { Button } from '../Button/Button';
 import { validateLogin } from '../helpers/validateLogin';
 import { ApiRes } from '../helpers/validateLogin';
 import { useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
 import './LoginForm.css';
+import { AuthContext } from '../../context/AuthContext';
 
 const initCurrentState = {
 	isLoading: false,
@@ -19,6 +21,7 @@ export const LoginForm = () => {
 		email: '',
 		password: '',
 	});
+	const { setLoggedIn } = useContext(AuthContext);
 	const navigate = useNavigate();
 
 	const handleFormUpdate = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -34,6 +37,8 @@ export const LoginForm = () => {
 		}));
 
 		if (isSuccess) {
+			Cookies.set('email', formData.email);
+			setLoggedIn(true);
 			setTimeout(() => {
 				navigate('/');
 			}, 999);
@@ -41,8 +46,7 @@ export const LoginForm = () => {
 	};
 
 	const onLoginClick = async () => {
-		setFormState(initCurrentState);
-		setFormState((prev) => ({ ...prev, isLoading: true }));
+		setFormState({ ...initCurrentState, isLoading: true });
 		await validateLogin(formData)
 			.then((res) => handleApiRespond(res))
 			.catch((err) => handleApiRespond(err));
@@ -57,7 +61,11 @@ export const LoginForm = () => {
 				type='password'
 				onChange={handleFormUpdate}
 			/>
-			<Button buttonText='Login' onClick={onLoginClick} />
+			<Button
+				buttonText='Login'
+				isDisabled={formState.isLoading}
+				onClick={onLoginClick}
+			/>
 			<div className='currentstate__container'>
 				{!!formState.isLoading && <p>Loading</p>}
 				{!!formState.isError && (

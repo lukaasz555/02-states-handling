@@ -8,6 +8,7 @@ export const Login = () => {
 				flexDirection: 'column',
 				alignItems: 'center',
 				width: '100%',
+				marginTop: '3em',
 			}}>
 			<LoginForm />
 		</div>
