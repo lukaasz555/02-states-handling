@@ -2,8 +2,14 @@
 	display: flex;
 	flex-direction: column;
 	row-gap: 1em;
-
-	/**/
-	/* border: 1px solid red; */
 	min-width: 250px;
+	max-width: 400px;
+	width: 100%;
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	padding: 2em;
+	border-radius: 12px;
+}
+
+.currentstate__container {
+	height: 15px;
 }

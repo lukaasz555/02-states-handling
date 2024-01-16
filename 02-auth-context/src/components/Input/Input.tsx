@@ -17,8 +17,6 @@ export const Input = ({
 	isDisabled = false,
 	placeholder,
 }: InputProps) => {
-	console.log(value, onChange, type, isDisabled, placeholder);
-
 	return (
 		<div className='input__wrapper'>
 			<label>
