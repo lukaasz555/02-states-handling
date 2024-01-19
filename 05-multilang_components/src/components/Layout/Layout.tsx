@@ -11,7 +11,6 @@ export const Layout = ({ children }: LayoutProps) => {
 				width: '100%',
 				maxWidth: '960px',
 				margin: '0 auto',
-				border: '1px solid red',
 			}}>
 			<Nav />
 			<main>{children}</main>

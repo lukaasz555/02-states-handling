@@ -4,8 +4,8 @@ import { Section } from '../components/Section/Section';
 import { useLangChanger } from '../components/LangChanger/useLangChanger';
 
 export const Home = () => {
-	// const [currentLang, setLang] = useState(LanguageEnum.EN);
 	const { selectedLang, setLang, texts } = useLangChanger();
+
 	return (
 		<LangContext.Provider value={{ selectedLang, setLang, texts }}>
 			<Layout>

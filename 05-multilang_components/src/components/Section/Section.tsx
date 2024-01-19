@@ -9,10 +9,6 @@ export const Section = ({ sectionName }: SectionProps) => {
 	const { texts } = useContext(LangContext);
 	const { title, subtitle, ctaButton } = texts[sectionName];
 
-	// const title = 'title';
-	// const subtitle = 'subtitle';
-	// const ctaButton = 'cta button';
-
 	return (
 		<section
 			style={{
