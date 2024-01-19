@@ -1,17 +1,26 @@
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { useItemDetailView } from '../hooks/useItemDetailView';
 
 export const ItemDetailView = () => {
 	const navigate = useNavigate();
-	const { id } = useParams();
-
-	// get itemById from itemsStore or sth
+	const { item } = useItemDetailView();
 
 	return (
 		<div>
 			<header style={{ marginBottom: '3em' }}>
 				<button onClick={() => navigate(-1)}>go back</button>
 			</header>
-			<main>ItemDetailView {id}</main>
+			{!item ? (
+				<>
+					<main>no found</main>
+				</>
+			) : (
+				<>
+					<main>
+						{item.name} @ {item.price}
+					</main>
+				</>
+			)}
 		</div>
 	);
 };

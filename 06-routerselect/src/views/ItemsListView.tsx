@@ -1,16 +1,17 @@
-import { useEffect, useState } from 'react';
 import { ItemCard } from '../components/ItemCard';
-import data from '../data/data.json';
-import { IProduct } from '../interfaces/IProduct';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../store/store';
+import { setItems } from '../store/reducers/itemsReducer';
+import mockData from '../data/data.json';
+import { useEffect } from 'react';
 
 export const ItemsListView = () => {
-	const [items, setItems] = useState<IProduct[]>([]);
+	const items = useSelector((state: RootState) => state.items.items);
+	const dispatch = useDispatch();
 
 	useEffect(() => {
-		setItems(data.items);
-	}, []);
-
-	//! TODO: receive items from itemsStore or sth instead of mock json
+		dispatch(setItems(mockData.items));
+	}, [dispatch]);
 
 	return (
 		<div
