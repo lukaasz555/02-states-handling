@@ -1,0 +1,16 @@
+/* nav {
+	border: 1px solid lime;
+} */
+
+ul {
+	list-style-type: none;
+}
+
+li {
+	margin: 2em;
+	font-size: 32px;
+}
+
+/* a {
+	color: orange !important;
+} */
