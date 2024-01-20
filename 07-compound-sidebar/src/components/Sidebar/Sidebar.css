@@ -1,0 +1,20 @@
+aside {
+	position: absolute;
+	left: 0;
+	top: 0;
+	height: 100%;
+	width: 50%;
+	display: flex;
+	justify-content: flex-end;
+	background: #2f2f2f;
+	padding: 2em;
+	border-bottom-right-radius: 12px;
+	border-top-right-radius: 12px;
+	transform: scaleX(0);
+	transition: transform 0.4s;
+	transform-origin: left;
+}
+
+aside.active {
+	transform: scaleX(1);
+}
