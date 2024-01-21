@@ -1,4 +1,4 @@
-import { SetStateAction, createContext } from 'react';
+import { createContext } from 'react';
 import { en } from '../data';
 
 export enum LanguageEnum {
@@ -17,12 +17,14 @@ export type TextType = {
 
 export type LangContextType = {
 	selectedLang: LanguageEnum;
-	setLang: React.Dispatch<SetStateAction<LanguageEnum>>;
+	// setLang: React.Dispatch<SetStateAction<LanguageEnum>>;
+	onChangeLang: (val: LanguageEnum) => void;
 	texts: TextType;
 };
 
 export const LangContext = createContext<LangContextType>({
 	selectedLang: LanguageEnum.EN,
-	setLang: () => {},
+	// setLang: () => {},
+	onChangeLang: () => {},
 	texts: { ...en },
 });
