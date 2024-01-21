@@ -1,0 +1,28 @@
+.button__container {
+	display: flex;
+}
+
+.button__container button {
+	padding: 0.5em 1.5em;
+	background-color: rgba(0, 0, 0, 1);
+}
+
+.button__container button:disabled {
+	cursor: default;
+}
+
+.button__container button,
+.button__container button:hover {
+	outline: none;
+	border: 1px solid transparent;
+	transition: background-color 0.2s;
+}
+
+.button__container button:hover {
+	background-color: rgba(255, 255, 255, 0.05);
+}
+
+.button__container button:is(:focus, :active) {
+	outline: none;
+	border: 1px solid rgba(74, 85, 188, 0.607);
+}

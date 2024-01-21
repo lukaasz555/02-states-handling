@@ -1,0 +1,20 @@
+header {
+	display: flex;
+	justify-content: space-between;
+
+	border-radius: 12px;
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	padding: 1em;
+	width: 100%;
+}
+
+header > h1 {
+	flex-basis: 60%;
+}
+
+header > div {
+	flex-basis: 15%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}

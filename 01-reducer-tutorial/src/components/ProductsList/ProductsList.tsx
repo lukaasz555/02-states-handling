@@ -1,10 +1,10 @@
 import { IProduct } from '../../interfaces/IProduct';
 import { CartState } from '../../reducers/cartReducer';
 import { ProductItem } from '../ProductItem/ProductItem';
+import products from '../../data/data.json';
 import './ProductsList.css';
 
 interface ProductsListProps {
-	allProducts: IProduct[];
 	state: CartState;
 	actions: {
 		addProduct: (arg: IProduct) => void;
@@ -13,14 +13,10 @@ interface ProductsListProps {
 	};
 }
 
-export const ProductsList = ({
-	allProducts,
-	state,
-	actions,
-}: ProductsListProps) => {
+export const ProductsList = ({ state, actions }: ProductsListProps) => {
 	return (
 		<div className='productslist__wrapper'>
-			{allProducts.map((p) => (
+			{products.items.map((p) => (
 				<ProductItem key={p.id} state={state} product={p} actions={actions} />
 			))}
 		</div>
