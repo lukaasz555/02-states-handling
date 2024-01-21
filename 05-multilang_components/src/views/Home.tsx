@@ -4,10 +4,10 @@ import { Section } from '../components/Section/Section';
 import { useLangChanger } from '../components/LangChanger/useLangChanger';
 
 export const Home = () => {
-	const { selectedLang, setLang, texts } = useLangChanger();
+	const { selectedLang, onChangeLang, texts } = useLangChanger();
 
 	return (
-		<LangContext.Provider value={{ selectedLang, setLang, texts }}>
+		<LangContext.Provider value={{ selectedLang, onChangeLang, texts }}>
 			<Layout>
 				<div
 					style={{
