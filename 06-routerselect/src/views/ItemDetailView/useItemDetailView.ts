@@ -1,8 +1,8 @@
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../store/store';
-import { getItemById } from '../store/reducers/itemsReducer';
 import { useEffect } from 'react';
+import { RootState } from '../../store/store';
+import { getItemById } from '../../store/reducers/itemsReducer';
 
 export const useItemDetailView = () => {
 	const { id } = useParams();

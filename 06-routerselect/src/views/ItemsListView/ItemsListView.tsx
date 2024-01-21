@@ -1,8 +1,8 @@
-import { ItemCard } from '../components/ItemCard';
+import { ItemCard } from '../../components/ItemCard';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../store/store';
-import { setItems } from '../store/reducers/itemsReducer';
-import mockData from '../data/data.json';
+import { RootState } from '../../store/store';
+import { setItems } from '../../store/reducers/itemsReducer';
+import mockData from '../../data/data.json';
 import { useEffect } from 'react';
 
 export const ItemsListView = () => {

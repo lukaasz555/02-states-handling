@@ -1,9 +1,16 @@
-import { useNavigate } from 'react-router-dom';
-import { useItemDetailView } from '../hooks/useItemDetailView';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useItemDetailView } from './useItemDetailView';
+import { useEffect } from 'react';
 
 export const ItemDetailView = () => {
+	const { id } = useParams();
 	const navigate = useNavigate();
-	const { item } = useItemDetailView();
+	const { item, getItem } = useItemDetailView();
+
+	useEffect(() => {
+		console.log('mounted comp');
+		getItem();
+	}, [id]);
 
 	return (
 		<div>

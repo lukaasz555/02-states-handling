@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { ItemsListView } from './views/ItemsListView';
-import { ItemDetailView } from './views/ItemDetailView';
+import { ItemsListView } from './views/ItemsListView/ItemsListView';
+import { ItemDetailView } from './views/ItemDetailView/ItemDetailView';
 import { Provider } from 'react-redux';
 import { store } from './store/store';
 import './App.css';
